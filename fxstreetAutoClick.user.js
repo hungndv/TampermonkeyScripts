@@ -25,6 +25,24 @@
     var callback = function (mutationsList) {
         for (var mutation of mutationsList) {
             if (mutation.type == 'childList') {
+                var elementToHide = document.querySelector(".fxs_bgHeader");
+                if (elementToHide && elementToHide.style.display === '') {
+                    elementToHide.style.display = "none";
+                    return;
+                }
+
+                var elementToHide2 = document.querySelector("#fxs_home > div:nth-child(1)");
+                if (elementToHide2 && elementToHide2.style.display === '') {
+                    elementToHide2.style.display = "none";
+                    return;
+                }
+
+                var elementToHide3 = document.querySelector("div[id^='brokersspreads_'] > section");
+                if (elementToHide3 && elementToHide3.style.display === '') {
+                    elementToHide3.style.display = "none";
+                    return;
+                }
+
                 nodeToObserve = document.querySelector("div[id^='fxs_search_alert_advancedsearchmanager_']");
                 if (nodeToObserve) {
                     console.log('Observe the node by selector "div[id^=\'fxs_search_alert_advancedsearchmanager_\']"');
@@ -41,12 +59,8 @@
                 if (mutation.attributeName === 'class') {
                     console.log('The ' + mutation.attributeName + ' attribute was modified.');
                     if (nodeToObserve.getAttribute('class').indexOf('fxs_hideElements') === -1) {
-                        nodeToObserve.click();
+                        window.location.reload();
                     }
-
-                    //document.querySelector(".fxs_bgHeader").style.display = "none";
-                    //document.querySelector("#fxs_home > div:nth-child(1)").style.display = "none";
-                    //document.querySelector("div[id^='brokersspreads_'] > section").style.display = "none";
                 }
             }
         }
